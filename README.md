@@ -3,6 +3,8 @@
 
 ## <font size=2> Attack Method </font>
 
+![GPU programming and executing model](D:\github\pictue\GPU programming and executing model.png)
+
 ## <font size=2> Attack Case </font>
 
 

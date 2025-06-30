@@ -1,9 +1,9 @@
 <!-- 标题 -->
-# <center><font size=5> A Kernel Hijacking Vulnerability on NVIDIA GPUs</font></center>
+# <center><font size=3> A Kernel Hijacking Vulnerability on NVIDIA GPUs</font></center>
 
-## <font size=4> Attack Method </font>
+## <font size=2> Attack Method </font>
 
-## <font size=4> Attack Case </font>
+## <font size=2> Attack Case </font>
 
 
 

@@ -12,7 +12,7 @@ In a GPU-based parallel computing platform, the GPU serves as a co-processor (de
 
 **Host side**: a host uses a group of driver APIs to manage the above kernel. It typically involves three steps: inputting the original data, invoking the kernel to process data and receiving the final results. First, since a GPU has its independent memory system, a host requires to allocate data space on it and then copy input data from host memory into the device memory (line 5-10). Then, the host manages and launches the kernel to process input data on the GPU (line 11-20). Specifically, the host first creates a context to maintain the state of the target GPU (line 13-14). Then, according to the kernel file's path, the host loads the above kernel into a module(line 15-16), and extracts the function from the module by kernel's name (line 17-18). Finally, the host configures and launches the kernel to process data with a certain computing resource, such as the number of threads, size of shared memory, etc. (line 19-20). 
 
-![GPU](GPU programming and executing model.png "GPU programming and executing model")
+![GPU](https://github.com/uestc-cyberlab/gpu_kernel_hijack/blob/main/images/GPU%20programming%20and%20executing%20model.png "GPU programming and executing model")
 
 
 

@@ -118,3 +118,11 @@ Finally, once the victim launch the CUDA program, the malicious API will hijack 
 
 ![GPU4](https://github.com/uestc-cyberlab/gpu_kernel_hijack/blob/main/images/malicious.png)
 
+
+
+# <font size=5> Conclusion </font>
+
+In the end, we provide an animation to show the above attack process.
+
+![GPU5](https://github.com/uestc-cyberlab/gpu_kernel_hijack/blob/main/images/animation.gif)
+

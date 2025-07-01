@@ -111,7 +111,7 @@ LD_PRELOAD = ./image_hijack.so
 
 ```
 sudo vim /etc.ld.so.preload
-./image_hijack.so
+/path/image_hijack.so
 ```
 
 Finally, once the victim launch the CUDA program, the malicious API will hijack the GPU kernel and implant a Trojan. As shown in Fig. 4, it will make the detected tumor area decrease sharply. We can observe that the tumor area is very small, which may cause a misjudgment of the patient's condition. This can result in a serious medical accident. 

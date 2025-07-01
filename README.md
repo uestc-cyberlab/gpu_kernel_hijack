@@ -40,6 +40,8 @@ Finally, an attacker can hijack a GPU kernel through the above two steps. We con
 
 
 
+![GPU2](https://github.com/uestc-cyberlab/gpu_kernel_hijack/blob/main/images/tumor.png)
+
 
 
 

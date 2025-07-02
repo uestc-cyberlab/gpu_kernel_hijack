@@ -26,7 +26,7 @@ make
 
 ![GPU1](https://github.com/uestc-cyberlab/gpu_kernel_hijack/blob/main/images/reference.png)
 
-(2) Step 2: Compile the attack tool and generate a disguised CUDA kernel loading API (image_hijack.so)
+(2) Step 2: Compile the attack tool and generate a disguised CUDA kernel loading API (image_hijack.so). In the disguised API, we implant a Trojan into the hijacked kernel.
 
 ```
 cd /POC/hijack_tool
@@ -49,7 +49,7 @@ vim /etc/ld.so.preload
 /usr/lib/image_hijack.so
 ```
 
-(4) Step 4: Run the victim application again
+(4) Step 4: Run the victim application again, and we can find that the result has been modified.
 
 ```
 cd /POC/victim_app

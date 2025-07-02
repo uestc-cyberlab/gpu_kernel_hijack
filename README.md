@@ -61,7 +61,7 @@ make
 
 # <font size=5> Conclusion </font>
 
-In the end, we provide an animation to present the above attack process.
+In the end, we provide an animation to present the above attack process. We can find that our attack method is covert and able to cause malicious code execution.
 
 ![GPU3](https://github.com/uestc-cyberlab/gpu_kernel_hijack/blob/main/images/animation.gif)
 

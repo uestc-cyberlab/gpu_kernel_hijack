@@ -26,14 +26,14 @@ make
 
 ![GPU1](https://github.com/uestc-cyberlab/gpu_kernel_hijack/blob/main/images/reference.png)
 
-(2) Step 2: Compile the attack tool and generate a disguised CUDA kernel loading API (image_hijack.so). In the disguised API, we implant a Trojan into the hijacked kernel.
+(2) Step 2: Compile the attack tool and generate a disguised CUDA kernel loading API (**cuModuleLoad()**). In the disguised API, we implant a Trojan into the hijacked kernel. In addition, we package the disguised API into a dynamic link library (image_hijack.so).
 
 ```
 cd /POC/hijack_tool
 make
 ```
 
-(3) Step 3: Manipulate the invocation mechanism of the dynamic link library (DLL), and preload the malicious API to replace the legitimate one (**cuModuleLoad()**)
+(3) Step 3: Manipulate the invocation mechanism of the dynamic link library (DLL), and preload the malicious API to replace the legitimate API call.
 
 ​	(3.1) Manipulate the DLL preloading environment variable (LD_PRELOAD), or
 
@@ -41,7 +41,7 @@ make
 LD_PRELOAD=./image_hijack.so
 ```
 
-​	(3.2) Manipulate the DLL preloading configuration file (ld.so.preload)
+​	(3.2) Manipulate the DLL preloading configuration file (ld.so.preload).
 
 ```
 cp image_hijack.so /usr/lib

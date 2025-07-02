@@ -2,7 +2,7 @@
 
 ## <font size=5> I. Introduction</font>
 
-We found a kernel hijacking vulnerability on NVIDIA GPUs. Through manipulating the invocation mechanism of the CUDA driver functions, attackers can craft a disguised CUDA kernel loading API (**cuModuleLoad()**) to hijack the GPU kernel. With this vulnerability, attacks can implant malicious logic into the hijacked kernel, causing malicious code execution. We publish a paper to illustrate this vulnerability.
+We found a kernel hijacking vulnerability on NVIDIA GPUs. Through manipulating the invocation mechanism of the CUDA driver functions, attackers can craft a disguised CUDA kernel loading API (**cuModuleLoad()**) to hijack the GPU kernel. With this vulnerability, attacks can implant malicious logic into the hijacked kernel, causing malicious code execution. We wrote a paper (A Novel Kernel Hijacking and Trojan Injection Method on Graphics Processing Units) to illustrate this vulnerability.
 
 ## <font size=5> II. Exploitation</font>
 

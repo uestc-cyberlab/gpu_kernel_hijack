@@ -2,7 +2,7 @@
 
 ## <font size=5> I. Introduction</font>
 
-We found a kernel hijacking vulnerability on NVIDIA GPUs. Through manipulating the invocation mechanism of the CUDA driver functions, attackers can craft a disguised CUDA kernel loading API (**cuModuleLoad()**) to hijack the GPU kernel. With this vulnerability, attacks can implant malicious logic into the hijacked kernel, causing malicious code execution. We wrote a paper (A Novel Kernel Hijacking and Trojan Injection Method on Graphics Processing Units) to illustrate this vulnerability.
+We found a kernel hijacking vulnerability on NVIDIA GPUs. Through manipulating the invocation mechanism of the CUDA driver functions, attackers can craft a disguised CUDA kernel loading API (**cuModuleLoad()**) to hijack the GPU kernel. With this vulnerability, attacks can implant malicious logic into the hijacked kernel, causing malicious code execution. 
 
 ## <font size=5> II. Exploitation</font>
 
@@ -16,7 +16,7 @@ We provide a Proof of Concept (POC) to demonstrate this vulnerability. In the PO
 
 **Reproduction Steps**
 
-(1) Step 1: Run the victim application
+(1) Step 1: Run the victim application. We provide an image processing case in /POC/victim_app.
 
 ```
 cd /POC/victim_app
@@ -67,5 +67,5 @@ In the end, we provide an animation to present the above attack process.
 
 ## Contact
 
-Please contact zhangyang1003@std.uestc.edu.cn for any questions.
+We wrote a paper (A Novel Kernel Hijacking and Trojan Injection Method on Graphics Processing Units) to illustrate this vulnerability. Please contact zhangyang1003@std.uestc.edu.cn for any questions. 
 
